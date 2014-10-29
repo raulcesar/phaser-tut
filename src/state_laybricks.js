@@ -1,19 +1,18 @@
 //This is the brick laying state.
 
+var laybricks = {
 
-var bricklaystate = {
 	preload: function() {
-
+		
 	},
 
 	create: function() {
+		this.brickpile = game.add.sprite(game.world.centerX, game.world.centerY, 'brickpile');
 
 	},
 
 	update: function() {
 
 	}
-	
 
-
-}
+};
