@@ -1,0 +1,26 @@
+{
+  "name": "phaser-tut",
+  "version": "0.0.1",
+  "description": "Chincos game in JS",
+  "main": " ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/raulcesar/phaser-tut.git"
+  },
+  "keywords": [
+    "phaser"
+  ],
+  "author": "Raul Cesar Teixeira",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/raulcesar/phaser-tut/issues"
+  },
+  "homepage": "https://github.com/raulcesar/phaser-tut",
+  "devDependencies": {
+    "gulp": "^3.8.9",
+    "gulp-connect": "^2.0.6"
+  }
+}
