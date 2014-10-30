@@ -1,63 +1,84 @@
 //This is the brick laying state.
+
+
+
 var laybricks = {
-	
-	// var brickSpriteSize
-	// var cornerBrickDetals = {width:, height: }
-
-	preload: function() {
-		
-	},
-
-	create: function() {
-		this.brickActualSize = new Sized2D(game.cache.getImage('brick').width, game.cache.getImage('brick').height);
-		this.brickAnchorSize = new Size2D(114, 59),
-
-		// this.brickOffsetDelta = new Size2D(
-		// 	brickActualSize.width - brickAnchorSize.width , 
-		// 	brickActualSize.height - brickAnchorSize.height);
-		this.brickWell = new BrickWell(this.brickAnchorSize, this.brickActualSize);
-		
+    // var brickSpriteSize
+    // var cornerBrickDetals = {width:, height: }
+    preload: function() {},
+    create: function() {
+        this.brickActualSize = new Size2D(game.cache.getImage('brick').width, game.cache.getImage('brick').height);
+        this.brickAnchorSize = new Size2D(114, 59),
+        // this.brickOffsetDelta = new Size2D(
+        // 	brickActualSize.width - brickAnchorSize.width , 
+        // 	brickActualSize.height - brickAnchorSize.height);
+        this.brickWell = new BrickWell(this.brickAnchorSize, this.brickActualSize);
+        this.createActiveBrick();
 
 
-		this.brickpile = game.add.sprite(game.world.centerX, game.world.centerY, 'brick');
-		this.brickpile.inputEnabled = true;
-		this.brickpile.input.enableDrag(false, true, false);
+        // this.brick2 = game.add.sprite(51, 0, 'brick');
+    },
 
-		this.brick2 = game.add.sprite(game.world.centerX, game.world.centerY, 'brick');
-	},
+    createActiveBrick: function() {
+        this.activeBrick = game.add.sprite(game.world.centerX, game.world.centerY, 'brick');
+        this.activeBrick.inputEnabled = true;
+        this.activeBrick.input.enableDrag(false, true, false);
 
-	update: function() {
+ 		this.activeBrick.events.onDragStop.add(this.onDragStop, this);
 
-	},
+    },
 
-	setupTargetGrid: function() {
-		/**
-		 * we will build a grid of brickAnchorSize tiles.
-		 *
-		 * 1) Find maximum number of bricks.
-		 * 2) Find starting point, by centering.
-		 */
-		
-		//Find total width of a well row.
-		var totalSize = game.world.width - this.brickOffsetDelta.width;
-		var bricksPerRow = totalSize = Math.floor(totalSize/this.brickAnchorSize);
-		var brickWellWidth = (bricksPerRow * this.brickAnchorSize.width) + this.brickOffsetDelta.width;
+    // render: function() {
+    //     this.brickWell.debugRender();
+    // },
 
+    onDragStop: function(sprite, pointer) {
+        //Check if droped in brickwell.
+        result = sprite.key + " dropped at x:" + pointer.x + " y: " + pointer.y;
 
-		//Find center.
-		var brickWellX = Math.floor((game.world.width - brickWellWidth) / 2);
+        var dropedRect = this.brickWell.getDropedOnRect(pointer);
+        if (dropedRect) {
+        	sprite.x = dropedRect.x;
+        	sprite.y = dropedRect.y;
+        	sprite.events.onDragStop.removeAll();
+        	sprite.input.disableDrag();
+        	//put the brick in its spot.
+        } else {
+        	sprite.destroy();
+        	//Remove the brick.
+        }
 
-		this.brickWell = new BrickWell(this.brickAnchorSize, this.brickActualSize, bricksPerRow, brickWellX);
-
-		//Place rows.
-		//We will not use physics to determine colision with the brickwell. Instead, we will check if the 
-		//mouse position is within a rectangle.
-
-
-
+        //Create new brick on pile!
+        this.createActiveBrick();
+    },
 
 
-		
-	}
+    update: function() {
+
+
+        //  only check for drop when mouse is clicked.
+        // if (game.input.mousePointer.isDown) {
+        //     //  400 is the speed it will move towards the mouse
+        //     game.physics.arcade.moveToPointer(sprite, 400);
+
+        //     //  if it's overlapping the mouse, don't move any more
+        //     if (Phaser.Rectangle.contains(sprite.body, game.input.x, game.input.y)) {
+        //         sprite.body.velocity.setTo(0, 0);
+        //     }
+        // } else {
+        //     sprite.body.velocity.setTo(0, 0);
+        // }
+
+
+        // if (checkOverlap(sprite1, sprite2)) {
+        //     text.text = 'Drag the sprites. Overlapping: true';
+        // } else {
+        //     text.text = 'Drag the sprites. Overlapping: false';
+        // }
+    },
+    // function checkOverlap(spriteA, spriteB) {
+    //     var boundsA = spriteA.getBounds();
+    //     var boundsB = spriteB.getBounds();
+    //     return Phaser.Rectangle.intersects(boundsA, boundsB);
+    // }
 };
-
