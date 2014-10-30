@@ -4,7 +4,7 @@ var loadState = {
 		//TODO: later remember to put in progress bar.
 
 		//Load brick:
-		game.load.image('brickpile', 'assets/brickortho.png');
+		game.load.image('brick', 'assets/brickortho.png');
 
 	},
 

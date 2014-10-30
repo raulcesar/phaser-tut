@@ -1,3 +1,5 @@
 node_modules/
 sublime-gulp.log
 phaser-tut.sublime-workspace
+.sublime-grunt.cache
+jshint-report.html

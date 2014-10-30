@@ -1,4 +1,5 @@
-var game = new Phaser.Game(400,300,Phaser.AUTO, 'gameDiv');
+var gameSize = new Size2D(800, 600);
+var game = new Phaser.Game(gameSize.width, gameSize.height, Phaser.AUTO, 'gameDiv');
 
 game.state.add('bootState', bootState);
 game.state.add('loadState', loadState);
