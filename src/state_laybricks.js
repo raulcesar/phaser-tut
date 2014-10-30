@@ -20,7 +20,8 @@ var laybricks = {
     },
 
     createActiveBrick: function() {
-        this.activeBrick = game.add.sprite(game.world.centerX, game.world.centerY, 'brick');
+        this.activeBrick = game.add.sprite(0, 0, 'brick');
+        // this.activeBrick = game.add.sprite(game.world.centerX, game.world.centerY, 'brick');
         this.activeBrick.inputEnabled = true;
         this.activeBrick.input.enableDrag(false, true, false);
 

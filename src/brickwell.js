@@ -34,7 +34,9 @@ BrickWell.prototype = {
 		this.brickSpots = new Array(this.bricksPerRow);
 
 		//Phaser uses 0,0 = top left, so we need to calculate initial y position.
-		var currentRowY = game.world.height - this.brickActualSize + (this.brickOffsetDelta.height * this.yOffset);
+		var currentRowY = game.world.height - this.brickActualSize.height + (this.brickOffsetDelta.height * this.yOffset);
+
+		console.log('Brick size: ' + this.brickActualSize.height + ' currentRowY: ' + currentRowY);
 
 
 		for (var i = 0; i < this.brickSpots.length; i++) {
@@ -49,10 +51,22 @@ BrickWell.prototype = {
 	getDropedOnRect: function(point) {
 		for (var i = 0; i < this.brickSpots.length; i++) {
 			if (this.brickSpots[i].contains(point.x, point.y)) {
+
+
 				return this.brickSpots[i]
 			}
 		}
 		return null;
+	},
+
+	recieveBrick: function(spot, sprite) {
+		//when we recieve a brick, redraw all bricks
+
+
+		sprite.x = dropedRect.x;
+		sprite.y = dropedRect.y;
+		sprite.events.onDragStop.removeAll();
+		sprite.input.disableDrag();
 	},
 
 	debugRender: function() {
