@@ -1,7 +1,6 @@
 'use strict';
 var gulp = require('gulp'),
-connect=require('gulp-connect')
-;
+connect=require('gulp-connect');
 // gulp.task('connect', plugins.connect.server({
 //   root: ['build'],
 //   port: 9000,
