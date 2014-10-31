@@ -14,13 +14,10 @@ var laybricks = {
         // 	brickActualSize.height - brickAnchorSize.height);
         this.brickWell = new BrickWell(this.brickAnchorSize, this.brickActualSize);
         this.createActiveBrick();
-
-
-        // this.brick2 = game.add.sprite(51, 0, 'brick');
     },
 
     createActiveBrick: function() {
-        this.activeBrick = game.add.sprite(0, 0, 'brick');
+        this.activeBrick = game.add.sprite(10, 10, 'brick');
         // this.activeBrick = game.add.sprite(game.world.centerX, game.world.centerY, 'brick');
         this.activeBrick.inputEnabled = true;
         this.activeBrick.input.enableDrag(false, true, false);
@@ -35,19 +32,7 @@ var laybricks = {
 
     onDragStop: function(sprite, pointer) {
         //Check if droped in brickwell.
-        result = sprite.key + " dropped at x:" + pointer.x + " y: " + pointer.y;
-
-        var dropedRect = this.brickWell.getDropedOnRect(pointer);
-        if (dropedRect) {
-        	sprite.x = dropedRect.x;
-        	sprite.y = dropedRect.y;
-        	sprite.events.onDragStop.removeAll();
-        	sprite.input.disableDrag();
-        	//put the brick in its spot.
-        } else {
-        	sprite.destroy();
-        	//Remove the brick.
-        }
+        this.brickWell.checkForDropAndRecieve(sprite, pointer);
 
         //Create new brick on pile!
         this.createActiveBrick();
@@ -55,6 +40,7 @@ var laybricks = {
 
 
     update: function() {
+
 
 
         //  only check for drop when mouse is clicked.

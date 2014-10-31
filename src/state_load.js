@@ -5,6 +5,7 @@ var loadState = {
 
 		//Load brick:
 		game.load.image('brick', 'assets/brickortho.png');
+		game.load.image('penguin', 'assets/splash.png');
 
 	},
 
